@@ -1,0 +1,100 @@
+/* Cinematic portfolio styles */
+:root{
+  /* Human & Elegant: warm ivory + deep teal accent */
+  --bg1: #f7f4ef; /* ivory */
+  --bg2: #f2ebe3; /* warm paper */
+  --accent: #0b6b5f; /* deep teal */
+  --muted: #6b6b66; /* soft charcoal */
+  --card-bg: rgba(255,255,255,0.8);
+}
+html,body{height:100%;}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;sans-serif;color:var(--muted);background:linear-gradient(180deg,var(--bg1),var(--bg2));-webkit-font-smoothing:antialiased}
+
+.card.cinematic{max-width:980px;margin:36px auto;border-radius:12px;overflow:hidden;box-shadow:0 18px 50px rgba(16,24,32,0.08);background:var(--card-bg);border:1px solid rgba(16,24,32,0.04)}
+
+/* Hero */
+.hero{padding:56px 48px;background:transparent;border-bottom:1px solid rgba(16,24,32,0.04)}
+.hero-title{font-size:44px;line-height:1.02;margin:0;color:var(--accent);font-family:Georgia, 'Times New Roman', serif;letter-spacing:0.3px}
+.hero-sub{margin:12px 0 0;color:var(--muted);font-size:15px}
+.hero-contact{margin:8px 0 0;color:var(--muted)}
+.hero-contact a{color:var(--accent);border-bottom:1px dashed rgba(11,107,95,0.12)}
+
+/* Panels */
+.cinematic-panel{padding:28px 36px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-bottom:1px solid rgba(255,255,255,0.02)}
+.cinematic-panel{padding:24px 36px;background:transparent;border-bottom:1px solid rgba(16,24,32,0.04);transform:translateY(14px);opacity:0;transition:transform .6s cubic-bezier(.2,.9,.2,1),opacity .6s ease}
+.cinematic-panel h2{color:var(--accent);margin:0 0 10px;font-size:20px;font-family:Georgia,serif}
+.cinematic-panel p{color:var(--muted);margin:0}
+.cinematic-panel.in-view{transform:none;opacity:1}
+.muted{color:var(--muted)}
+
+/* Skills chips */
+.row.skill-chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:linear-gradient(90deg,rgba(11,107,95,0.06),rgba(11,107,95,0.02));padding:8px 14px;border-radius:999px;color:var(--accent);font-weight:600;font-size:14px;box-shadow:inset 0 -6px 18px rgba(11,107,95,0.04)}
+
+/* animate chips */
+.chip{transform:translateY(8px) scale(.98);opacity:0;transition:transform .45s cubic-bezier(.2,.9,.2,1),opacity .45s ease}
+.cinematic-panel.in-view .chip{transform:none;opacity:1}
+
+/* Projects list */
+.projects-list{margin:0;padding-left:20px;color:var(--muted)}
+.projects-list li{margin-bottom:8px}
+
+/* Footer */
+.cinematic-footer{padding:18px 36px;color:var(--muted);font-size:13px;text-align:right}
+
+/* Subtle film grain overlay */
+.card.cinematic::after{content:"";position:absolute;left:0;right:0;top:0;bottom:0;pointer-events:none;background-image:radial-gradient(rgba(0,0,0,0.02) 1px, transparent 1px);background-size:6px 6px;mix-blend-mode:overlay;opacity:0.06}
+
+/* Intro */
+.intro{padding:14px 48px 12px 48px;background:transparent;border-bottom:1px solid rgba(16,24,32,0.03)}
+.intro-text{color:var(--muted);font-size:17px;margin:0 0 8px;min-height:28px;white-space:pre-wrap}
+.intro-text::after{content:' \7c';margin-left:6px;color:var(--accent);opacity:0.9;animation:blink 1s steps(1) infinite}
+.intro-sub{margin:0;color:var(--muted)}
+
+@keyframes blink{50%{opacity:0}100%{opacity:1}}
+
+@media (max-width:720px){
+  .hero{padding:36px 20px}
+  .hero-title{font-size:32px}
+  .cinematic-panel{padding:18px 20px}
+  .card.cinematic{margin:18px}
+}
+
+/* Navigation */
+.nav{display:flex;gap:16px;align-items:center;margin-top:12px}
+.nav a{color:rgba(255,255,255,0.85);padding:8px 12px;border-radius:10px;font-weight:600}
+.nav a:hover{background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+.nav a.active{background:linear-gradient(90deg,var(--accent),#ffaa6b);color:#071019}
+
+/* Animated gradient background */
+.card.cinematic{position:relative}
+.card.cinematic::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,#07203b 0%, #0f3550 35%, #192e42 60%);opacity:0.12;z-index:0;pointer-events:none;mix-blend-mode:screen;animation:shiftBG 10s linear infinite}
+@keyframes shiftBG{0%{transform:translateX(-10%)}50%{transform:translateX(10%)}100%{transform:translateX(-10%)}}
+
+/* Hero title animation */
+.hero-title{display:inline-block;transform:translateY(6px);opacity:0;transition:transform .8s cubic-bezier(.2,.9,.2,1),opacity .8s ease}
+.hero-title.animate-in{transform:none;opacity:1}
+
+/* Parallax layers */
+.hero::before{content:"";position:absolute;left:0;right:0;top:0;height:120px;background:radial-gradient(ellipse at center, rgba(255,255,255,0.02), transparent 40%);pointer-events:none}
+.hero{position:relative;z-index:2}
+
+/* Hide all hero details initially; reveal after title animation */
+.hero .hero-sub,
+.hero .hero-contact,
+.hero .nav,
+.intro{opacity:1;transform:none;transition:opacity .5s ease,transform .45s cubic-bezier(.2,.9,.2,1);pointer-events:auto}
+.hero.revealed .hero-sub,
+.hero.revealed .hero-contact,
+.hero.revealed .nav,
+.hero.revealed + .intro{opacity:1;transform:none;pointer-events:auto}
+
+/* Make title stand out with accent underline */
+.hero-title{position:relative}
+.hero-title::after{content:'';position:absolute;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),rgba(0,212,255,0.5));bottom:-10px;border-radius:6px;opacity:0.9}
+
+/* Page transitions */
+.page-enter{opacity:0;transform:translateY(10px)}
+.page-enter.page-enter-active{opacity:1;transform:none;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.9,.2,1)}
+.page-exit{opacity:1}
+.page-exit.page-exit-active{opacity:0;transform:translateY(-8px);transition:opacity .35s ease,transform .35s cubic-bezier(.4,.0,.2,1)}
